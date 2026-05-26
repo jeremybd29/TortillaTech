@@ -106,33 +106,18 @@ public class Taco extends Product{
     //display taco details
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
+        String text = "";
 
-        builder.append(size)
-                .append("Taco\n");
+        text += size + "Taco\n";
+        text += "Shell: " + shell + "\n";
+        text += "Ingredients:\n";
 
-        builder.append("Shell:")
-                .append(shell)
-                .append("\n");
+        for (Ingredients ingredient : ingredients) {
+            text += "- " + ingredient + "\n";
+        }
+        text += "Price: $" + String.format("%.2f", getPrice());
 
-        builder.append("Shell:")
-                .append(shell)
-                .append("\n");
-
-        builder.append("Ingredients:\n");
-
-        //stream for ingredients
-        ingredients.stream()
-
-                .forEach(ingredient -> builder.append("- ")
-                        .append(ingredient)
-                        .append("\n")
-
-                );
-builder.append(
-        String.format( "Price: $%.2f", getPrice() )
-);
-return builder.toString();
+        return text;
 
 
 }
