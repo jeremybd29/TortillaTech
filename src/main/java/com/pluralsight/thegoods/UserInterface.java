@@ -16,9 +16,7 @@ public class UserInterface {
     public void display() {
         boolean exit = false;
         while (!exit) {
-            System.out.println("Welcome to The Goods! Please select an option:");
-            System.out.println("1. Create a new order");
-            System.out.println("2. Exit");
+            displayHomeScreen();
 
             String choice = scanner.nextLine();
 
@@ -57,26 +55,34 @@ public class UserInterface {
 
         while (ordering) {
             displayOrderScreen();
-            int choice = Integer.parseInt(scanner.nextLine());
+            String choice = scanner.nextLine();
 
             switch (choice) {
 
-                case 1:
+                case "1":
                     addTaco(order);
                     break;
 
-                case 2:
+                case "2":
                     addDrink(order);
                     break;
 
-                case 3:
+                case "3":
                     addChipsAndSalsa(order);
                     break;
 
-                case 0:
+                case "4":
+                    checkout(order);
+                    ordering = false;
+                    break;
+
+                case "0":
                     ordering = false;
                     System.out.println("Order cancelled. Returning to home screen.");
                     break;
+
+                default:
+                    System.out.println("Invalid option. Please try again.");
             }
         }
     }
@@ -90,6 +96,7 @@ public class UserInterface {
         System.out.println("1. Add Taco");
         System.out.println("2. Add Drink");
         System.out.println("3. Add Chips & Salsa");
+        System.out.println("4. Checkout");
         System.out.println("0) cancel order");
 
         System.out.print("Select option: ");
@@ -103,18 +110,30 @@ public class UserInterface {
         String size = scanner.nextLine();
 
         //collect type
-        System.out.print("Select shell type (Corn, Flour, bowl): ");
+        System.out.print("Select shell type (Corn, Flour, blue corn): ");
         String shell = scanner.nextLine();
 
         //taco object
         Taco taco = new Taco(size, shell);
 
-        //temperature ingredient later user selects ingredients dynamically.
-        taco.addIngredient(new Ingredients("Beef", "Meat", false));
+        // user selects ingredients dynamically.
+       addMeat(taco);
+         addIngredient(taco);
+        addQueso(taco);
+        addSauces(taco);
+        addExtras(taco);
+
 
         order.addProduct(taco);
         System.out.println("Taco added to order!");
     }
+
+    private void addSauces(Taco taco) {
+    }
+
+    private void addExtras(Taco taco) {
+    }
+
     //add drink
     private void addDrink(Order order) {
 
@@ -151,7 +170,88 @@ public class UserInterface {
     //displays entire order
     private void checkout(Order order){
 
-        System.out
+        //calling toString method of order
+        System.out.println(order);
+
+        ReceiptFileManager.saveReceipt(order);
+
+        System.out.println("Order complete. Confirmation sent via email");
+    }
+    //methods for dynamic taco ingredients
+    private void addMeat(Taco taco) {
+        System.out.println();
+        System.out.print("Select meat (Chicken, Beef, Pork, Al Pastor): ");
+        String choice = scanner.nextLine();
+        String meatName = "";
+
+        switch (choice){
+
+            case "Chicken":
+                meatName = "Chicken";
+                break;
+            case "Beef":
+                meatName = "Beef";
+                break;
+            case "Pork":
+                meatName = "Pork";
+                break;
+            case "Al Pastor":
+                meatName = "Al Pastor";
+                break;
+
+            default:
+                System.out.println("Invalid meat selection");
+                return;
+        }
+        //extra meat
+        System.out.print("Add extra meat? (yes/no): ");
+        String extraInput = scanner.nextLine();
+
+        boolean extraMeat = extraInput.equalsIgnoreCase("yes");
+
+        //create ingredient object and add to taco
+        Ingredients meat = new Ingredients(meatName, "meat", extraMeat);
+        taco.addIngredient(meat);
+        System.out.println(meatName + " added to taco!");
+    }
+    //method for dynamic taco ingredients
+    private void addIngredient(Taco taco) {
+        System.out.print("Select ingredient (onion, cilantro, salsa verde, salsa roja): ");
+        String choice = scanner.nextLine();
+        String ingredientName = "";
+
+        switch (choice) {
+            case "onion":
+                ingredientName = "onion";
+                break;
+            case "cilantro":
+                ingredientName = "cilantro";
+                break;
+            case "salsa verde":
+                ingredientName = "salsa verde";
+                break;
+            case "salsa roja":
+                ingredientName = "salsa roja";
+                break;
+            default:
+                System.out.println("Invalid ingredient selection");
+                return;
+        }
+        //create ingredient object and add to taco
+        Ingredients ingredient = new Ingredients(ingredientName, "regular", false);
+        taco.addIngredient(ingredient);
+        System.out.println(ingredientName + " added to taco!");
+    }
+
+    //method for Queso
+    private void addQueso(Taco taco) {
+        System.out.print("Add queso? (yes/no): ");
+        String input = scanner.nextLine();
+        boolean addQueso = input.equalsIgnoreCase("yes");
+        taco.setCoveredInQueso(addQueso);
+        if (addQueso) {
+            System.out.println("Queso added to taco!");
+        }
     }
 
 }

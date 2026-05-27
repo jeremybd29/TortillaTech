@@ -34,6 +34,7 @@ public class Ingredients {
     //ingredient pricing
     //depends on ingredient category and whether it's extra
     public double getPrice(String size) {
+        String category = getCategory();
 
         //regular ingredients and sauces
         if (category.equalsIgnoreCase("regular")
@@ -43,7 +44,6 @@ public class Ingredients {
 
         //meat pricing
         if (category.equalsIgnoreCase("meat")) {
-
             switch (size.toLowerCase()) {
 
                 case "single":
@@ -53,12 +53,12 @@ public class Ingredients {
                     }
                     return 1.00;
 
-                case "3 tacos":
+                case "3":
 
                     if (extra) {
                         return 3.00;
                     }
-                    return 2.00;
+                    return 2.50;
 
                 case "burrito":
 

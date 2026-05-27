@@ -36,6 +36,7 @@ public class Taco extends Product{
         return shell;
     }
 
+
     public ArrayList<Ingredients> getIngredients() {
         return ingredients;
     }
@@ -73,16 +74,14 @@ public class Taco extends Product{
         double total = 0;
 
         //base price
-        switch (size.toLowerCase()){
-            case "single":
-                total += 3.00;
-                break;
-            case "3 tacos":
-                total += 8.00;
-                break;
-            case "burrito":
-                total += 10.00;
-                break;
+
+        if(size.equalsIgnoreCase("single")) {
+            total += 3.00;
+        } else if (size.equalsIgnoreCase("3 tacos")) {
+            total += 8.00;
+        }
+        else if (size.equalsIgnoreCase("burrito")) {
+            total += 9.00;
         }
 
         //stream for adding ingredients
@@ -115,6 +114,18 @@ public class Taco extends Product{
         for (Ingredients ingredient : ingredients) {
             text += "- " + ingredient + "\n";
         }
+
+        //display extras
+        if (coveredInQueso) {
+            text += "- Covered in Queso\n";
+        }
+        if (guacamole) {
+            text += "- Guacamole\n";
+        }
+        if (coveredInSalsa) {
+            text += "- Covered in Salsa\n";
+        }
+
         text += "Price: $" + String.format("%.2f", getPrice());
 
         return text;
