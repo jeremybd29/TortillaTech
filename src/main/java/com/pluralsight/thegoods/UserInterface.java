@@ -106,7 +106,7 @@ public class UserInterface {
         System.out.println();
 
         //collect taco size
-        System.out.print("Select taco size (Single, 3 Tacos, Burrito): ");
+        System.out.print("Select taco size (Single, 3 Taco plate, Burrito): ");
         String size = scanner.nextLine();
 
         //collect type

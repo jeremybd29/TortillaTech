@@ -28,7 +28,7 @@ public class ChipsAndSalsa extends Product {
     @Override
     public String toString() {
         return "Chips & Salsa ("+
-                salsaType + ") -$"
+                salsaType + ") $"
                 +String.format("%.2f",
                 getPrice());
     }

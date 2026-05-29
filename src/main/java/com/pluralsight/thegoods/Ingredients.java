@@ -49,23 +49,23 @@ public class Ingredients {
                 case "single":
 
                     if (extra) {
-                        return 1.50;
+                        return 3.50;
                     }
-                    return 1.00;
+                    return 2.00;
 
                 case "3":
 
                     if (extra) {
-                        return 3.00;
+                        return 10.00;
                     }
-                    return 2.50;
+                    return 8.50;
 
                 case "burrito":
 
                     if (extra) {
-                        return 4.00;
+                        return 13.00;
                     }
-                    return 3.00;
+                    return 10.00;
             }
         }
 

@@ -76,9 +76,9 @@ public class Taco extends Product{
         //base price
 
         if(size.equalsIgnoreCase("single")) {
-            total += 3.00;
+            total += 2.50;
         } else if (size.equalsIgnoreCase("3 tacos")) {
-            total += 8.00;
+            total += 10.00;
         }
         else if (size.equalsIgnoreCase("burrito")) {
             total += 9.00;
